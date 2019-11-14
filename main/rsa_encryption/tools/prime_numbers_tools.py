@@ -1,7 +1,7 @@
 from math import floor, sqrt
 from random import randint
 
-from settings import RANGE_OF_PRIME_NUMBERS
+from rsa_encryption.settings import RANGE_OF_PRIME_NUMBERS
 
 
 def _get_number_divisiors(number: int):
@@ -23,7 +23,7 @@ def _check_is_prime_number(number: int):
 
 def get_two_numbers_prime():
     """
-    Function return two radom number prime.
+    Function return two random number prime.
     """
     first_number_prime, second_number_prime = None, None
     min_value, max_value = RANGE_OF_PRIME_NUMBERS["min"], RANGE_OF_PRIME_NUMBERS["max"]

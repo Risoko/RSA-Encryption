@@ -1,7 +1,7 @@
 from collections import namedtuple
 from itertools import count
 
-from prime_numbers_tools import get_two_numbers_prime
+from rsa_encryption.tools.prime_numbers_tools import get_two_numbers_prime
 
 
 euler_and_module = namedtuple("euler_and_module", "euler module")

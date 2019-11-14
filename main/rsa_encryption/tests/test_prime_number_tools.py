@@ -1,6 +1,8 @@
-from unittest import TestCase, main, expectedFailure
+from unittest import TestCase, main
 
-from prime_numbers_tools import _get_number_divisiors, _check_is_prime_number, get_two_numbers_prime
+from rsa_encryption.tools.prime_numbers_tools import (
+    _get_number_divisiors, _check_is_prime_number, get_two_numbers_prime
+)
 
 class TestGetNumberDivisiors(TestCase):
     
