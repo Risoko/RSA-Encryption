@@ -1,9 +1,10 @@
 import getopt, sys
 from datetime import datetime, timedelta
 
-from rsa_encryption.settings import DEFAULT_PUBLIC_KEY_NAME
+from rsa_encryption.settings import DEFAULT_PUBLIC_KEY_NAME, PATH_FOR_PUBLIC_KEY, KEYS_EXPIRE
 from rsa_encryption.tools.keys_tool import create_keys
-
+from rsa_encryption.tools.encryption_tool import encryption
+from rsa_encryption.tools.decryption_tool import decryption
 from rsa_encryption.data_base.create_column import Keys
 from rsa_encryption.data_base.operation_on_table import delete_unactive_key, insert_value
 
@@ -11,7 +12,7 @@ from rsa_encryption.data_base.operation_on_table import delete_unactive_key, ins
 def main():
     delete_unactive_key()
     try:
-        opts, _ = getopt.getopt(sys.argv[1:], "c:", ["create_key=",])
+        opts, _ = getopt.getopt(sys.argv[1:], "c:e:d:", ["create_key=",])
     except getopt.GetoptError as err:
         print(err)
         sys.exit(2)
@@ -23,7 +24,11 @@ def main():
                     insert_value(
                         table_name=Keys,
                         name_public_key=arg + ".txt",
-                        keys_expire_date=datetime.now() + timedelta(minutes=2),
+                        keys_expire_date=datetime.now() + timedelta(
+                            days=KEYS_EXPIRE['DAYS'],
+                            minutes=KEYS_EXPIRE['MINUTES'],
+                            seconds=KEYS_EXPIRE['SECONDS']
+                        ),
                         private_key=private_key,
                         public_key=public_key
                     )
@@ -39,11 +44,16 @@ def main():
                         print("Stop program.")
                         break
                 else:    
-                    with open(arg + '.txt', 'w') as file:
+                    with open(PATH_FOR_PUBLIC_KEY + '/' + arg + '.txt', 'w') as file:
                         file.write(str(public_key))
                     break
+        if option == '-e':
+            encryption(arg)
+        if option == '-d':
+            decryption(arg)
+            
 
-
+  
 
 
 

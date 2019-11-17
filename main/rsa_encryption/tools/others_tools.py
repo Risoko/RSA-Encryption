@@ -49,6 +49,11 @@ def get_private_exponent(public_exponent: int, euler: int):
         if number * public_exponent % euler == 1:
             return number
 
+def rewrite_the_contents_of_the_files(rewrite_with, write_to):
+    with open(rewrite_with, "r") as file:
+        with open(write_to, 'w') as file2:
+            file2.write(file.read())
+
 
 if __name__ == "__main__":
     a = get_function_euler_and_module()
