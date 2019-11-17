@@ -1,5 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime
+
 from rsa_encryption.data_base.connect_database import Base, engine
+
 
 class Keys(Base):
     __tablename__ = "Keys"

@@ -1,7 +1,7 @@
-import getopt, sys
+import getopt, os, sys
 from datetime import datetime, timedelta
 
-from rsa_encryption.settings import DEFAULT_PUBLIC_KEY_NAME, PATH_FOR_PUBLIC_KEY, KEYS_EXPIRE
+from rsa_encryption.settings import PATH_FOR_PUBLIC_KEY, KEYS_EXPIRE
 from rsa_encryption.tools.keys_tool import create_keys
 from rsa_encryption.tools.encryption_tool import encryption
 from rsa_encryption.tools.decryption_tool import decryption
@@ -10,9 +10,12 @@ from rsa_encryption.data_base.operation_on_table import delete_unactive_key, ins
 
 
 def main():
+    """
+    Main program function.
+    """
     delete_unactive_key()
     try:
-        opts, _ = getopt.getopt(sys.argv[1:], "c:e:d:", ["create_key=",])
+        opts, _ = getopt.getopt(sys.argv[1:], "c:e:d:s")
     except getopt.GetoptError as err:
         print(err)
         sys.exit(2)
@@ -51,10 +54,9 @@ def main():
             encryption(arg)
         if option == '-d':
             decryption(arg)
-            
-
-  
-
-
+        if option == '-s':
+            for _, _, f in os.walk(PATH_FOR_PUBLIC_KEY):
+                for element in f:
+                    print(element[:-4])
 
 main()

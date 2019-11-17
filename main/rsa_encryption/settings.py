@@ -4,7 +4,6 @@ RANGE_OF_PRIME_NUMBERS = {
     "min": 10,
     "max": 190
 }
-DEFAULT_PUBLIC_KEY_NAME = "PublicKey" 
 
 DATABASE = {
     'type': config("TYPE"),
@@ -18,6 +17,6 @@ PATH_FOR_PUBLIC_KEY = "/home/risoko/Pulpit/public_key"
 
 KEYS_EXPIRE = {
     "DAYS": 0,
-    "MINUTES": 2,
+    "MINUTES": 10,
     "SECONDS": 0
 }

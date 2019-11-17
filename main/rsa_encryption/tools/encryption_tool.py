@@ -1,11 +1,19 @@
 import os
 from time import sleep
-from tqdm import tqdm
-from rsa_encryption.data_base.operation_on_table import get_public_key
-from rsa_encryption.tools.others_tools import rewrite_the_contents_of_the_files
 
-def encryption(name_public_key):
+from tqdm import tqdm
+
+from rsa_encryption.data_base.operation_on_table import get_public_key
+from rsa_encryption.tools.others_tools import check_path, rewrite_the_contents_of_the_files
+
+
+def encryption(name_public_key: str):
+    """
+    The function encrypts the given file. 
+    The function takes the name of the public key.
+    """
     path = input("Enter the path to the file you want to encrypt: ")
+    check_path(path)
     public_key = tuple(int(element) for element in get_public_key(name_public_key).split(","))
     with open(path, 'r') as file:
         with open("helpty.txt", "w") as file2:
@@ -14,6 +22,7 @@ def encryption(name_public_key):
                 file2.write(str(ord(element)**public_key[0] % public_key[1]) + " ")
     rewrite_the_contents_of_the_files("helpty.txt", path)
     os.remove("helpty.txt")
+    print("OK")
 
 
 
